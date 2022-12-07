@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -13,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -20,7 +22,10 @@ import com.focus.net.util.NavBarItems
 
 @Composable
 fun BottomNavigationBar(navHostController: NavHostController) {
-    BottomNavigation {
+    BottomNavigation(
+        backgroundColor = Color.Black.copy(alpha = 0.0f),
+        modifier = Modifier.padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
+    ) {
         val backStackEntry by navHostController.currentBackStackEntryAsState()
         val currentRoute = backStackEntry?.destination?.route
 
@@ -38,10 +43,11 @@ fun BottomNavigationBar(navHostController: NavHostController) {
                 },
                 icon = {
                     Icon(imageVector = navItem.image, 
-                        contentDescription = navItem.title )
+                        contentDescription = navItem.title,
+                        tint = Color.White)
                 },
                 label = {
-                    Text(text = navItem.title)
+                    Text(text = navItem.title, fontSize = 10.sp)
                 }
             )
         }

@@ -1,27 +1,20 @@
 package com.focus.net.util
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.*
 import com.focus.net.model.BarItem
 import com.focus.net.ui.navigation.NavRoutes
 
 object NavBarItems {
     val BarItems = listOf(
         BarItem(
-            title = "Home",
+            title = "Focus Mode",
             image = Icons.Filled.Home,
             route = HOME
         ),
         BarItem(
-            title = "Focus Mode",
-            image = Icons.Filled.Face,
-            route = FOCUS_MODE
-        ),
-        BarItem(
             title = "Timer Mode",
-            image = Icons.Filled.Face,
+            image = Icons.Filled.Notifications,
             route = TIMER_MODE
         ),
         BarItem(
@@ -31,7 +24,7 @@ object NavBarItems {
         ),
         BarItem(
             title = "Music",
-            image = Icons.Filled.Favorite,
+            image = Icons.Filled.Share,
             route = MUSIC
         )
     )
