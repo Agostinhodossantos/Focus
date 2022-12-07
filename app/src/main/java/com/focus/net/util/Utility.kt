@@ -1,4 +1,4 @@
-package com.focus.net.ui.util
+package com.focus.net.util
 
 import java.util.concurrent.TimeUnit
 

@@ -4,8 +4,8 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.focus.net.ui.util.Utility
-import com.focus.net.ui.util.Utility.formatTime
+import com.focus.net.util.Utility
+import com.focus.net.util.Utility.formatTime
 
 class MainViewModel : ViewModel() {
     private var countDownTimer: CountDownTimer? = null

@@ -26,8 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.focus.net.R
-import com.focus.net.ui.util.Utility
-import com.focus.net.ui.util.Utility.formatTime
+import com.focus.net.util.Utility
+import com.focus.net.util.Utility.formatTime
 import com.focus.net.ui.viewmodel.MainViewModel
 
 @Composable
