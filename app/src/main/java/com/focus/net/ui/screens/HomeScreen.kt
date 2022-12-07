@@ -21,21 +21,11 @@ fun Home(modifier: Modifier = Modifier) {
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop)
-
         Column(modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-
-            Spacer(modifier = Modifier.height(100.dp))
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             TimerClock()
-            Column(modifier =  Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Spacer(modifier = Modifier.height(50.dp))
-                Button(onClick = {}) {
-                    Text(text = stringResource(R.string.start_now))
-                }
-            }
-            
         }
     }
 

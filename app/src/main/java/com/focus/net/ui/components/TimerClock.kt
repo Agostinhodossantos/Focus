@@ -2,14 +2,9 @@ package com.focus.net.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProgressIndicatorDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,14 +13,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.focus.net.R
+import androidx.compose.ui.window.Popup
+import com.focus.net.ui.theme.Grey
 import com.focus.net.util.Utility
 import com.focus.net.util.Utility.formatTime
 import com.focus.net.ui.viewmodel.MainViewModel
@@ -33,11 +24,13 @@ import com.focus.net.ui.viewmodel.MainViewModel
 @Composable
 fun TimerClock(modifier: Modifier = Modifier, viewModel: MainViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
 
-    val time by viewModel.time.observeAsState(Utility.TIME_COUNTDOWN.formatTime())
+    viewModel.setTime(200000L)
+    val time = viewModel.time.value
+    val current by viewModel.currentTime.observeAsState(time!!.formatTime())
     val progress by viewModel.progress.observeAsState(1.00F)
     val isPlaying by viewModel.isPlaying.observeAsState(false)
 
-    CountDownView(time = time, progress = progress, isPlaying = isPlaying, celebrate = false) {
+    CountDownView(time = current, progress = progress, isPlaying = isPlaying, celebrate = false) {
         viewModel.handleCountDownTimer()
     }
 }
@@ -50,30 +43,30 @@ fun CountDownView(
     celebrate: Boolean,
     optionSelected: () -> Unit
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
+    Column(modifier = Modifier.wrapContentHeight(),
+        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (celebrate) {
            // ShowCelebration()
         }
         CountDownIndicator(
-            Modifier.padding(top = 50.dp),
+            Modifier.padding(top = 120.dp),
             progress = progress,
             time = time,
-            size = 250,
-            stroke = 12
+            size = 290,
+            stroke = 4
         )
 
         CountDownButton(
-
             modifier = Modifier
-                .padding(top = 70.dp)
+                .padding(top = 150.dp)
                 .size(70.dp),
             isPlaying = isPlaying
         ) {
             optionSelected()
         }
+
     }
     
 }
@@ -91,13 +84,13 @@ fun CountDownIndicator(
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
 
-    Column(modifier = Modifier) {
+    Column(modifier) {
         Box {
             CircularProgressIndicatorBackGround(
                 modifier = Modifier
                     .height(size.dp)
                     .width(size.dp),
-                color = colorResource(R.color.purple_700),
+                color = Color.White,
                 stroke = stroke
             )
 
@@ -106,7 +99,7 @@ fun CountDownIndicator(
                 modifier = Modifier
                     .height(size.dp)
                     .width(size.dp),
-                color = colorResource(R.color.teal_200),
+                color = Grey,
                 strokeWidth = stroke.dp
             )
             

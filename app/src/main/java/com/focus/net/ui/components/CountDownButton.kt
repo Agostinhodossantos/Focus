@@ -1,11 +1,13 @@
 package com.focus.net.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.*
 import androidx.compose.material3.DividerDefaults.color
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,24 +32,27 @@ fun CountDownButton(
         Button(onClick = {
             optionSelected()
         },modifier = Modifier
-            .height(70.dp)
-            .width(200.dp),
-            shape = RoundedCornerShape(25.dp),
-
+            .height(60.dp)
+            .wrapContentWidth(),
             colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White,
-            )
-        ) {
+                containerColor = Color.White,
+                contentColor = Color.Black)) {
+
             val pair = if (!isPlaying) {
-                "START"
+                "Começar a Concentrar-se"
             } else {
-                "STOP"
+                "Pausar"
             }
-            
+            Icon(
+                imageVector = Icons.Filled.PlayArrow,
+                contentDescription = "Start",
+                tint = Color.Black,
+                modifier = Modifier.size(26.dp)
+            )
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
             Text(
                 text = pair,
-                fontSize = 20.sp,
-                color = Color.White,
+                fontSize = 16.sp,
             )
 
         }
