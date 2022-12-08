@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.focus.net.util.Utility
 import com.focus.net.util.Utility.formatTime
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel : ViewModel() {
     private var countDownTimer: CountDownTimer? = null
@@ -22,6 +24,9 @@ class MainViewModel : ViewModel() {
 
     private val _isPlaying = MutableLiveData(false)
     val isPlaying: LiveData<Boolean> = _isPlaying
+
+    private val _digits = MutableStateFlow(mutableListOf<Int>())
+    val digits: StateFlow<MutableList<Int>> = _digits
 
     fun handleCountDownTimer() {
         if (isPlaying.value == true) {
@@ -60,6 +65,10 @@ class MainViewModel : ViewModel() {
 
     fun setTime(time: Long) {
         _time.value = time
+    }
+
+    fun addDigits(num: Int) {
+        _digits.value.add(num)
     }
 
 }
