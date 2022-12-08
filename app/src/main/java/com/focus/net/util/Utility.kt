@@ -16,4 +16,14 @@ object Utility {
         TimeUnit.MILLISECONDS.toSeconds(this) % 60
     )
 
+    //List of button
+    fun getNumbersList(): List<Int> {
+        var numbers = mutableListOf<Int>()
+        repeat(9) {
+            numbers.add(it + 1)
+        }
+        return numbers
+    }
+
+
 }

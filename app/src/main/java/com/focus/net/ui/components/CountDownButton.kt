@@ -24,9 +24,8 @@ fun CountDownButton(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight()
             .padding(top = 90.dp)
     ) {
         Button(onClick = {

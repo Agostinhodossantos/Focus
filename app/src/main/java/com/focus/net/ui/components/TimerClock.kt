@@ -1,5 +1,6 @@
 package com.focus.net.ui.components
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.focus.net.ui.theme.Grey
@@ -43,8 +45,9 @@ fun CountDownView(
     celebrate: Boolean,
     optionSelected: () -> Unit
 ) {
+    var popupControl by remember { mutableStateOf(false) }
+
     Column(modifier = Modifier.wrapContentHeight(),
-        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (celebrate) {
@@ -60,12 +63,16 @@ fun CountDownView(
 
         CountDownButton(
             modifier = Modifier
-                .padding(top = 150.dp)
-                .size(70.dp),
+                .padding(top = 10.dp),
             isPlaying = isPlaying
         ) {
             optionSelected()
         }
+
+        ButtonSetTimer({
+            Log.e("TImer", it)
+        })
+
 
     }
     

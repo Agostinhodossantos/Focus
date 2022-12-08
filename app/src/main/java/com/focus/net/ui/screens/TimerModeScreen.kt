@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.window.Popup
+import com.focus.net.ui.components.DialogSetupTime
 
 @Composable
 fun TimerModeScreen(modifier: Modifier = Modifier) {
@@ -28,9 +29,8 @@ fun TimerModeScreen(modifier: Modifier = Modifier) {
             Popup(
                 alignment = Alignment.CenterStart,
                 offset = IntOffset(0, 700),
-                onDismissRequest = { popupControl = false }
+                onDismissRequest = { popupControl = false },
             ) {
-                Text(text = "Im pop up")
             }
         }
     }

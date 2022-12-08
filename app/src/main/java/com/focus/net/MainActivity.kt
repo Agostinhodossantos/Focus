@@ -9,6 +9,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.focus.net.ui.components.CustomKeyboard
+import com.focus.net.ui.screens.KeyboardScreen
 import com.focus.net.ui.screens.MainScreen
 import com.focus.net.ui.theme.FocusTheme
 
@@ -22,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    KeyboardScreen()
                 }
             }
         }
