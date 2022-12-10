@@ -29,6 +29,10 @@ android {
 //        }
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -105,6 +109,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.truth)
+    testImplementation(libs.androidx.arch)
 
     // Instrumented tests: jUnit rules and runners
 

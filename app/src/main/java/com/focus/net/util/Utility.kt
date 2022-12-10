@@ -7,7 +7,8 @@ object Utility {
 
     //time to countdown - 1hr - 60secs
     //const val TIME_COUNTDOWN: Long = 60000L
-    private const val TIME_FORMAT = "%02d:%02d:%02d"
+    private const val TIME_FORMAT = "%02d:%02d"
+    private const val TIME_FORMAT_FULL = "%02d:%02d:%02d"
 
 
     //convert time to milli seconds
@@ -27,19 +28,22 @@ object Utility {
     }
 
     fun getDigitsDisplay(num: MutableList<Int>): String {
+
         // If num is its not complete add zeros
-        if (num.size < 6) {
-            repeat(  6 - num.size) {
-                num.add(0)
+        var nums = mutableListOf<Int>()
+        nums.addAll(num)
+        if (nums.size < 6) {
+            repeat(  6 - nums.size) {
+                nums.add(0)
             }
         }
-        print(num)
+       // nums.reverse()
+        var HH = "${nums[0]}${nums[1]}".toInt();
+        var MM = "${nums[2]}${nums[3]}".toInt();
+        var SS = "${nums[4]}${nums[5]}".toInt();
 
-        var HH = "${num[0]}${num[1]}".toInt();
-        var MM = "${num[2]}${num[3]}".toInt();
-        var SS = "${num[4]}${num[5]}".toInt();
-
-        val timeInHHMMSS = String.format(TIME_FORMAT, HH, MM,SS)
+        val timeInHHMMSS = String.format(TIME_FORMAT_FULL, HH, MM,SS)
+        Log.e("TIMER", timeInHHMMSS)
         return timeInHHMMSS;
     }
 

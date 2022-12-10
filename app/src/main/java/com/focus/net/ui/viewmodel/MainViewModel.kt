@@ -26,7 +26,7 @@ class MainViewModel : ViewModel() {
     val isPlaying: LiveData<Boolean> = _isPlaying
 
     private val _digits = MutableStateFlow(mutableListOf<Int>())
-    val digits: StateFlow<MutableList<Int>> = _digits
+    val digits: StateFlow<MutableList<Int>> get() = _digits
 
     fun handleCountDownTimer() {
         if (isPlaying.value == true) {
@@ -68,7 +68,9 @@ class MainViewModel : ViewModel() {
     }
 
     fun addDigits(num: Int) {
-        _digits.value.add(num)
+        _digits.value = _digits.value.toMutableList().apply {
+            add(num)
+        }
     }
 
 }
