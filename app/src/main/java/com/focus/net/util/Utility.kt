@@ -28,7 +28,6 @@ object Utility {
     }
 
     fun getDigitsDisplay(num: MutableList<Int>): String {
-
         // If num is its not complete add zeros
         var nums = mutableListOf<Int>()
         nums.addAll(num)
@@ -43,9 +42,27 @@ object Utility {
         var SS = "${nums[4]}${nums[5]}".toInt();
 
         val timeInHHMMSS = String.format(TIME_FORMAT_FULL, HH, MM,SS)
-        Log.e("TIMER", timeInHHMMSS)
         return timeInHHMMSS;
     }
 
+    fun getCursorIndex(index: Int): Pair<Int, Boolean> {
+        if (index == 0) {
+            return Pair(index, false)
+        }
+        if ((index + 1) % 3 == 0) {
+            return Pair((index + 1), true)
+        }
+        return Pair(index, false)
+    }
 
+
+}
+
+fun main() {
+    repeat(10) {
+        var pos = it + 1
+        if (pos % 3 == 0) {
+            println(pos)
+        }
+    }
 }

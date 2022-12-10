@@ -1,6 +1,7 @@
 package com.focus.net.ui.components
 
 import android.util.Log
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,20 +10,19 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import  androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.substring
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.focus.net.ui.viewmodel.MainViewModel
+import com.focus.net.util.Utility.getCursorIndex
 import com.focus.net.util.Utility.getDigitsDisplay
 import com.focus.net.util.Utility.getNumbersList
 import kotlinx.coroutines.CoroutineScope
@@ -78,26 +78,43 @@ fun ButtonNumber(
 
 
 @Composable
-fun DisplayDigit(digits: String, position: Int = 3) {
-    var firstText = digits.substring(0, position)
-    var letterPost = if (position > 2) position + 1 else position
+fun DisplayDigit(digits: String, position: Int) {
+    var jump by remember { mutableStateOf(0) }
+    var posText by remember { mutableStateOf("") }
+    var restText by remember { mutableStateOf("") }
+    var firstText by remember { mutableStateOf("") }
 
-    var posText = digits.substring(letterPost , letterPost + 1)
-    var restText = ""
+    val infiniteTransition = rememberInfiniteTransition()
 
-    restText = if (position < ( digits.length + 1)) {
-        digits.substring(letterPost + 1, digits.length)
-    } else {
-        digits.substring(digits.length)
+    val fading by infiniteTransition.animateFloat(
+        initialValue = 1f ,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(500),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+
+    var indexPosition = jump + position
+    var index = getCursorIndex(indexPosition)
+
+    if (index.second) {
+        jump += 1
+    }
+
+    if (index.first + 2 <= digits.length) {
+        firstText = digits.substring(0, indexPosition)
+        posText = digits.substring(index.first , index.first + 1)
+        restText = digits.substring(index.first + 1, digits.length)
     }
     Log.e("Digits", digits)
-
     Text(
         text = buildAnnotatedString {
             append(firstText)
               withStyle(
                   style = SpanStyle(
-                      color = Color.Green,
+                      color = Color.Green.copy(alpha = fading),
                   )
               ) {
                   append(posText)
